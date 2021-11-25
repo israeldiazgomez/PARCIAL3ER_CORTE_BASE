@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<h2> Listado de Laboratorios</h2>
+<h1 class="pull-right">
+  <a href="{% url 'laboratorios:laboratorioCreate' %}" class="btn btn-primary pull-right" style="margin-top: -10px; margin-bottom: 5px">Agregar</a>
+</h1>
+
+<table class="table  table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">nombre</th>
+      <th scope="col">pais</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if laboratorios %}
+        {% for laboratorio in laboratorios %}
+           <tr>
+      
+              <td>{{ laboratorio.id}}</td>
+              <td>{{ laboratorio.nombre}}</td>
+              <td>{{ laboratorio.pais}}</td>
+             <td>
+              <a class="btn btn-warning" href="{% url 'laboratorios:laboratorioEdit' laboratorio.id %}">  
+               
+                <i class="fas fa-pen-square"></i>
+                </a>
+               <a class="btn btn-danger" href="{% url 'laboratorios:laboratorioDelete' laboratorio.id %}">
+                
+                <i class="fas fa-trash-alt"></i>
+        
+
+               </a>
+                
+             </td>
+               
+              
+           </tr>
+           {% endfor %}
+           {% else %}  
+             <h3> Sin registros</h3>
+         {% endif %}
+         
+       </tbody>
+     </table>
+  {% endblock %}

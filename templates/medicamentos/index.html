@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<h2> Listado de Medicamentos</h2>
+<h1 class="pull-right">
+  <a href="{% url 'medicamentos:medicamentoCreate' %}" class="btn btn-primary pull-right" style="margin-top: -10px; margin-bottom: 5px">Agregar</a>
+</h1>
+
+<table class="table  table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">nombre</th>
+      <th scope="col">laboratorio</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if medicamentos %}
+        {% for medicamento in medicamentos %}
+           <tr>
+      
+              <td>{{ medicamento.id}}</td>
+              <td>{{ medicamento.nombre}}</td>
+              <td>{{ medicamento.laboratorio}}</td>
+             <td>
+              <a class="btn btn-warning" href="{% url 'medicamentos:medicamentoEdit' medicamento.id %}">  
+               
+                <i class="fas fa-pen-square"></i>
+                </a>
+               <a class="btn btn-danger" href="{% url 'medicamentos:medicamentoDelete' medicamento.id %}">
+                
+                <i class="fas fa-trash-alt"></i>
+        
+
+               </a>
+                
+             </td>
+               
+              
+           </tr>
+           {% endfor %}
+           {% else %}  
+             <h3> Sin registros</h3>
+         {% endif %}
+         
+       </tbody>
+     </table>
+  {% endblock %}
